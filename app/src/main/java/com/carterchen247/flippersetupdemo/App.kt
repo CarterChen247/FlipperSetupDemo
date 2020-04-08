@@ -18,7 +18,7 @@ class App : Application() {
         if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {
             val client = AndroidFlipperClient.getInstance(this)
             client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
-            client.addPlugin(NetworkFlipperPlugin())
+            client.addPlugin(NetworkModule.networkFlipperPlugin)
             client.start()
         }
     }
