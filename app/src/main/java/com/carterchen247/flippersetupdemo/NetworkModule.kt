@@ -9,15 +9,17 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 object NetworkModule {
     val networkFlipperPlugin by lazy { NetworkFlipperPlugin() }
 
-    fun getRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .client(getOkHttpClient())
+    private val okHttpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder()
+            .addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin, true))
+            .build()
+    }
+
+    val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .baseUrl("http://www.google.com")
             .build()
     }
-
-    fun getOkHttpClient() = OkHttpClient.Builder()
-        .addNetworkInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
-        .build()
 }

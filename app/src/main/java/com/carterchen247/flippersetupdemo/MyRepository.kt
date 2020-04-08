@@ -8,7 +8,7 @@ import okhttp3.ResponseBody
 object MyRepository {
 
     fun getDefaultApi(): Single<ResponseBody> {
-        return NetworkModule.getRetrofit()
+        return NetworkModule.retrofit
             .create(MyService::class.java)
             .getDefaultApi("http://www.google.com")
             .subscribeOn(Schedulers.io())
