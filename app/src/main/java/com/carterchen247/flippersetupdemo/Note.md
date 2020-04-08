@@ -2,7 +2,9 @@
 
 - Open Flipper desktop app
     - click Doctor
-        - Android SDK not configured
+        - [x] Android SDK not configured
+        - [x] Watchman not configured
+            - by brew install watchman
 
 - Back to Android Studio
     - Menu
